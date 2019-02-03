@@ -1,16 +1,20 @@
 {
   "name": "food-graphql-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "The GraphQL server to reserve food.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.3.1",
-    "graphql": "^14.1.1"
+    "graphql": "^14.1.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }
