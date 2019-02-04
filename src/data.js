@@ -2,7 +2,7 @@ const uuid = require('uuid');
 
 const stores = [
   {
-    id: 'cc406ed9-fc02-4185-b073-8c12b61b5c79'
+    id: 'cc406ed9-fc02-4185-b073-8c12b61b5c79',
     name: 'Den Olijfboom',
   },
   {
@@ -11,12 +11,17 @@ const stores = [
   }
 ];
 
-export function createStore({ name }) {
+function createStore({ name }) {
   const newStore = { id: uuid(), name };
   stores.push(newStore);
   return newStore;
 }
 
-export function getStores() {
+function getStores() {
   return stores;
 }
+
+module.exports = {
+  createStore,
+  getStores
+};

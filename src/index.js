@@ -1,4 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server');
+const resolvers = require('./resolvers');
+const typeDefs = require('./typeDefs');
 
 // ⚽️  Goal
 // --------
@@ -9,28 +11,24 @@ const { ApolloServer, gql } = require('apollo-server');
 // a store, we get a list of products (query) of that store.
 // We pick some products, pick a quantity, and we make a reservation (mutation)
 
-// 🏪  Exercise 1
+// 🏪  Exercise 2
 // --------------
 
-// 1) First we create two files. One for our type definitions, `typeDefs.js`,
-//    and one for our resolver functions, `resolvers.js`.
-// 2) Create a GraphQL type definition for our store. A store has an id and a name.
-// 3) Create a Query `stores` to get a list of stores.
-// 4) Create a resolver function that returns the list of stores.
-// 5) Try out the GraphQL query in the GraphQL Playground (🚀 http://localhost:4000/)
+// Creating a mutation.
 
-// Type definitions define the "shape" of your data and specify
-// which ways the data can be fetched from the GraphQL server.
-const typeDefs = gql`
-  type Query {
-    test: String
-  }
-`;
-
-// Resolvers define the technique for fetching the types in the
-// schema.
-const resolvers = {
-};
+// 1) Create a type definition for the Mutation `createStore`, to create a store.
+//    Create an input type `StoreInput`, and use it as first argument of `createStore`.
+// 2) Create a resolver function for the Mutation `createStore`.
+// 3) Use `yup` in the resolver function to validate the input. (https://github.com/jquense/yup)
+// 4) Create a service layer. Create a file `storeService.js` and put all business
+//    logic and data base logic in the service layer.
+//    This exercise is focussed on GraphQL but in real-life, middleware will
+//    validate if the user is authorized (e.g. check the Authorization header).
+//    Afterwards the resolver function will validate the input and call the service layer.
+// 5) Try out the GraphQL mutation in the GraphQL Playground (🚀 http://localhost:4000/)
+// 6) Query the stores, and check if the new store is in the list.
+// 7) Extend the store with an address (street, number, postalCode, city) and create a fragment
+//    to query it.
 
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
