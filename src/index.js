@@ -25,6 +25,7 @@ const typeDefs = require('./typeDefs');
 //    name the variable `withProducts`.
 
 // 1) Check: https://graphql.org/learn/queries/#variables
+// 4) products @include(if: $withProducts) {
 
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers

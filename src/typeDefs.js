@@ -4,6 +4,14 @@ const { gql } = require('apollo-server');
 // which ways the data can be fetched from the GraphQL server.
 module.exports = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
+
+  type Product {
+    description: String
+    id: String
+    name: String
+    price: Float
+  }
+
   # This "Store" type can be used in other type declarations.
   type Store {
     city: String
@@ -11,6 +19,7 @@ module.exports = gql`
     name: String
     number: Int
     postalCode: String
+    products: [Product]
     street: String
   }
 
@@ -18,6 +27,7 @@ module.exports = gql`
   # (A "Mutation" type will be covered later on.)
   type Query {
     stores: [Store]
+    store(id: String): Store
   }
 
   input StoreInput {

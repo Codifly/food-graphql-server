@@ -15,11 +15,30 @@ const createStoreSchema = yup.object()
     street: yup.string().max(255),
   });
 
+const getStoreSchema =  yup.object()
+  .shape({
+    id: yup.string().min(36).max(36),
+  });
+
 // Resolvers define the technique for fetching the types in the
 // schema.
 module.exports = {
   Query: {
     stores: () => data.getStores(),
+    store: async (parent, input) => {
+      try {
+        await getStoreSchema.validate(input);
+      } catch (e) {
+        throw new UserInputError('Invalid input.', { validationErrors: e.errors });
+      }
+      const { id } = input;
+      return data.getStore(id);
+    },
+  },
+  Store: {
+    products: async ({ id: storeId }) => {
+      return data.getStoreProducts(storeId);
+    }
   },
   Mutation: {
     createStore: async (parent, { input }) => {
