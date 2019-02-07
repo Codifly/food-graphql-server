@@ -32,7 +32,7 @@ module.exports = gql`
 
   input StoreInput {
     city: String
-    name: String
+    name: String!
     number: Int
     postalCode: String
     street: String

@@ -11,21 +11,20 @@ const typeDefs = require('./typeDefs');
 // a store, we get a list of products (query) of that store.
 // We pick some products, pick a quantity, and we make a reservation (mutation)
 
-// 🏪  Exercise 3
+// 🏪  Exercise 4
 // --------------
 
-// Now we want to display the products for a store, we can select the quantity of each product,
-// and make a reservation.
+// Now we will focus on creating a reservation, which looks like this:
+// { id, date, reservationProducts: { product: { id, name price }, quantity })).
 
-// 1) Create a Query `store` to retrieve a store by id. Extend the data store to find the right store.
-// 2) Create a list of products with a reference (storeId).
-// 3) Extend the Store type with a list of products. A product has a price, name and description.
-//    `products` becomes a field of the store. Add a resolver function to get the products of a store.
-// 4) Go to the GraphQL Playground and use a directive to query a store with or without products,
-//    name the variable `withProducts`.
-
-// 1) Check: https://graphql.org/learn/queries/#variables
-// 4) products @include(if: $withProducts) {
+// 1) Create a Mutation to create a reservation `createReservation`
+//    that takes an object as input. The input type is named `ReservationInput`.
+//    ReservationInput contains a list of { productId, quantity } (input type is named `ReservationProductInput`),
+//    named `reservationProducts` (field of `ReservationInput`).
+// 2) Now create a resolver function for the mutation and insert it into our in-memory database.
+// 3) Create a query field reservationProducts under Reservation, to get the reservationProducts [{ product, quantity }].
+//    Similar as stores under Query.
+// 4) Go to the GraphQL Playground and try out the createReservation mutation!
 
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers

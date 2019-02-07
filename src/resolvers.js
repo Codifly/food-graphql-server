@@ -2,6 +2,8 @@ const { UserInputError } = require('apollo-server');
 const yup = require('yup');
 const data = require('./data');
 
+const uuidSchema = yup.string().min(36).max(36);
+
 const createStoreSchema = yup.object()
   .shape({
     city: yup.string().max(255),
@@ -15,9 +17,19 @@ const createStoreSchema = yup.object()
     street: yup.string().max(255),
   });
 
-const getStoreSchema =  yup.object()
+const getStoreSchema = yup.object()
   .shape({
-    id: yup.string().min(36).max(36),
+    id: uuidSchema,
+  });
+
+const createReservationSchema = yup.object()
+  .shape({
+    reservationProducts: yup.array(
+      yup.object().shape({
+        productId: uuidSchema,
+        quantity: yup.number().required().positive().integer(),
+      })
+    ),
   });
 
 // Resolvers define the technique for fetching the types in the
@@ -49,6 +61,6 @@ module.exports = {
       }
       const { city, name, number, postalCode, street } = input;
       return data.createStore({ city, name, number, postalCode, street });
-    }
+    },
   }
 };

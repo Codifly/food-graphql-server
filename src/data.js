@@ -51,6 +51,10 @@ const products = [{
   storeId: '5f2919aa-333a-4745-8166-3002ab30de0e',
 }];
 
+const reservations = [];
+
+let reservationProducts = [];
+
 function createStore({ city, name, number, postalCode, street }) {
   const newStore = {
     city,
@@ -74,11 +78,21 @@ function getStores() {
 
 function getStoreProducts(storeId) {
   return products.filter((p) => p.storeId === storeId)
-} 
+}
+
+function getReservationProducts(reservationId) {
+  return [];
+}
+
+function createReservation(reservation) {
+  return {};
+}
 
 module.exports = {
   createStore,
+  createReservation,
   getStore,
   getStores,
-  getStoreProducts
+  getStoreProducts,
+  getReservationProducts
 };
