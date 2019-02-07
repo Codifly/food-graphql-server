@@ -81,11 +81,29 @@ function getStoreProducts(storeId) {
 }
 
 function getReservationProducts(reservationId) {
-  return [];
+  return reservationProducts
+    // Join
+    .filter((rp) => rp.reservationId === reservationId)
+    .map((rp) => ({
+      product: products.find(p => p.id === rp.productId),
+      quantity: rp.quantity
+    }));
 }
 
 function createReservation(reservation) {
-  return {};
+  const reservationId = uuid();
+  const newReservation = {
+    date: new Date(),
+    id: reservationId,
+  };
+  reservations.push(newReservation);
+  reservationProducts = reservationProducts.concat(
+    reservation.reservationProducts.map((reservationProduct) => ({
+      ...reservationProduct,
+      reservationId
+    })
+  ));
+  return newReservation;
 }
 
 module.exports = {

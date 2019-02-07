@@ -47,6 +47,11 @@ module.exports = {
       return data.getStore(id);
     },
   },
+  Reservation: {
+    reservationProducts: async ({ id }) => {
+      return data.getReservationProducts(id);
+    }
+  },
   Store: {
     products: async ({ id: storeId }) => {
       return data.getStoreProducts(storeId);
@@ -62,5 +67,14 @@ module.exports = {
       const { city, name, number, postalCode, street } = input;
       return data.createStore({ city, name, number, postalCode, street });
     },
+    createReservation: async (parent, { input }) => {
+      try {
+        await createReservationSchema.validate(input);
+      } catch (e) {
+        throw new UserInputError('Invalid input.', { validationErrors: e.errors });
+      }
+      const { reservationProducts } = input;
+      return data.createReservation({ reservationProducts });
+    }
   }
 };

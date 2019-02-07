@@ -23,6 +23,17 @@ module.exports = gql`
     street: String
   }
 
+  type ReservationProduct {
+    product: Product
+    quantity: Int
+  }
+
+  type Reservation {
+    date: String
+    id: String
+    reservationProducts: [ReservationProduct]
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
@@ -38,7 +49,17 @@ module.exports = gql`
     street: String
   }
 
+  input ReservationProductInput {
+    productId: String!
+    quantity: Int
+  }
+
+  input ReservationInput {
+    reservationProducts: [ReservationProductInput]
+  }
+
   type Mutation {
     createStore(input: StoreInput): Store
+    createReservation(input: ReservationInput): Reservation
   }
 `;
