@@ -1,5 +1,6 @@
 const { UserInputError } = require('apollo-server');
 const yup = require('yup');
+const dateTimeScalar = require('./scalars/dateTime');
 const data = require('./data');
 
 const uuidSchema = yup.string().min(36).max(36);
@@ -76,5 +77,6 @@ module.exports = {
       const { reservationProducts } = input;
       return data.createReservation({ reservationProducts });
     }
-  }
+  },
+  DateTime: dateTimeScalar,
 };
