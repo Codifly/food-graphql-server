@@ -52,7 +52,7 @@ module.exports = gql`
   }
 
   input ReservationProductInput {
-    productId: String!
+    productId: ID
     quantity: Int
   }
 
